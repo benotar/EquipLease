@@ -10,13 +10,19 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
-        var dbConfiguration = new DatabaseConfiguration();
-
-        configuration.Bind(DatabaseConfiguration.ConfigurationKey, dbConfiguration);
-
+        var dbConfig = new DatabaseConfiguration();
+        
+        configuration.Bind(DatabaseConfiguration.ConfigurationKey, dbConfig);
+        
         services.AddDbContext<EquipDbContext>(options =>
         {
-            var filledConnectionString = string.Format(dbConfiguration.ConnectionStringPattern);
+            // Set the password in an environment variable "Database__Password"
+            var databasePassword = !string.IsNullOrEmpty(dbConfig.Password)
+                ? dbConfig.Password
+                : throw new ArgumentException("Database password in not valid!", dbConfig.Password);
+            
+            var filledConnectionString = string.Format(dbConfig.ConnectionStringPattern,
+                databasePassword);
             
             options.UseSqlServer(filledConnectionString);
 

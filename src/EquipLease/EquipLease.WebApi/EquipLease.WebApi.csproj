@@ -15,8 +15,4 @@
       <ProjectReference Include="..\EquipLease.Persistence\EquipLease.Persistence.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Controllers\" />
-    </ItemGroup>
-
 </Project>
