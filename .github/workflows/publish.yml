@@ -7,7 +7,7 @@ on:
     - master
 
 env: 
-  Database__Password: ${{secrets.DATABASE_PASSWORD}}
+  DATABASE__PASSWORD: ${{secrets.DATABASE__PASSWORD}}
   AZURE_WEBAPP_NAME: equip-lease
   AZURE_WEBAPP_PACKAGE_PATH: "./publish"
     
