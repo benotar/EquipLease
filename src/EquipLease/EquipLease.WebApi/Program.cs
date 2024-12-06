@@ -15,4 +15,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+// Standard route for the home page
+app.MapGet("/", () => $"Welcome to the Home Page EquipLease API!\nUTC Time: {DateTime.UtcNow}");
+
 app.Run();
