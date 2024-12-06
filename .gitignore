@@ -482,3 +482,6 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Plugin for Rider directory
+src/EquipLease/EAFCS6953
