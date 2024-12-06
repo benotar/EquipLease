@@ -17,9 +17,9 @@ public static class DependencyInjection
         services.AddDbContext<EquipDbContext>(options =>
         {
             // Set the password in an environment variable "Database__Password"
-            var databasePassword = !string.IsNullOrEmpty(dbConfig.PASSWORD)
-                ? dbConfig.PASSWORD
-                : throw new ArgumentException("Database password in not valid!", dbConfig.PASSWORD);
+            var databasePassword = !string.IsNullOrEmpty(dbConfig.Password)
+                ? dbConfig.Password
+                : throw new ArgumentException("Database password in not valid!", dbConfig.Password);
             
             var filledConnectionString = string.Format(dbConfig.ConnectionStringPattern,
                 databasePassword);
