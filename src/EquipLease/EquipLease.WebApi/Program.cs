@@ -1,3 +1,4 @@
+using EquipLease.Application;
 using EquipLease.Application.Common.Converters;
 using EquipLease.Domain.Enums;
 using EquipLease.Persistence;
@@ -7,7 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCustomConfigurations(builder.Configuration);
 
-builder.Services.AddPersistence(builder.Configuration);
+builder.Services
+    .AddApplication()
+    .AddPersistence(builder.Configuration);
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
