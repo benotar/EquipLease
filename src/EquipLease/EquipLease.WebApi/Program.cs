@@ -1,25 +1,29 @@
 using EquipLease.Application;
-using EquipLease.Application.Common.Converters;
-using EquipLease.Domain.Enums;
 using EquipLease.Persistence;
 using EquipLease.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Custom configurations
 builder.Services.AddCustomConfigurations(builder.Configuration);
 
+// Application layers
 builder.Services
     .AddApplication()
     .AddPersistence(builder.Configuration);
 
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-        options.JsonSerializerOptions.Converters
-            .Add(new ServerResponseStringEnumConverter<ErrorCode>()));
+// Configured controllers
+builder.Services.AddControllersWithConfiguredApiBehavior(builder.Configuration);
+
+// Exceptions handling
+builder.Services.AddExceptionHandlerWithProblemDetails();
 
 var app = builder.Build();
 
 app.UseAuthorization();
+
+// Use exceptions handling
+app.UseExceptionHandler();
 
 app.MapControllers();
 

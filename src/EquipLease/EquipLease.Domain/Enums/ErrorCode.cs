@@ -6,5 +6,6 @@ public enum ErrorCode
     ProcessEquipmentTypeNotFound,
     EquipmentQuantityNotValid,
     NotEnoughFreeArea,
-    UnknownError
+    InvalidModel,
+    UnexpectedError
 }
