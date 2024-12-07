@@ -17,9 +17,6 @@ jobs:
     steps:
         - uses: actions/checkout@v3
 
-        - name: Set environment variable for database password
-          run: echo "DATABASE__PASSWORD=${{ secrets.DATABASE__PASSWORD }}" >> $GITHUB_ENV
-
         - name: Setup .NET
           uses: actions/setup-dotnet@v3
           with:
