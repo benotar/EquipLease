@@ -16,15 +16,12 @@ public static class DependencyInjection
         
         services.AddDbContext<EquipDbContext>(options =>
         {
-            // Set the password in an environment variable "Database__Password"
-            var databasePassword = !string.IsNullOrEmpty(dbConfig.Password)
-                ? dbConfig.Password
-                : throw new ArgumentException("Database password in not valid!", dbConfig.Password);
+            // Set the password in an environment variable "Database__ConnectionStringPattern"
+            var connectionStringPattern =  dbConfig.ConnectionStringPattern = !string.IsNullOrEmpty(dbConfig.ConnectionStringPattern)
+                ? dbConfig.ConnectionStringPattern
+                : throw new ArgumentException("The database connection string pattern is invalid!", dbConfig.ConnectionStringPattern);
             
-            var filledConnectionString = string.Format(dbConfig.ConnectionStringPattern,
-                databasePassword);
-            
-            options.UseSqlServer(filledConnectionString);
+            options.UseSqlServer(connectionStringPattern);
 
             // If there is no EF cache, then it improves EF performance.
             // To work with queries that change the state of an entity - use .AsTracking().
