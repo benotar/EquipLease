@@ -1,3 +1,5 @@
+using EquipLease.Application.Common.Converters;
+using EquipLease.Domain.Enums;
 using EquipLease.Persistence;
 using EquipLease.WebApi;
 
@@ -7,7 +9,10 @@ builder.Services.AddCustomConfigurations(builder.Configuration);
 
 builder.Services.AddPersistence(builder.Configuration);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+        options.JsonSerializerOptions.Converters
+            .Add(new ServerResponseStringEnumConverter<ErrorCode>()));
 
 var app = builder.Build();
 
