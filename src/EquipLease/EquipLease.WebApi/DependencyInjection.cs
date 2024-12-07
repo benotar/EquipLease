@@ -10,7 +10,7 @@ public static class DependencyInjection
         // Add database configurations
         services.Configure<DatabaseConfiguration>(
             configuration.GetSection(DatabaseConfiguration.ConfigurationKey));
-
+        
         return services;
     }
 }
