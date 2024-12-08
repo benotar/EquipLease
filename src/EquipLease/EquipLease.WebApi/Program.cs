@@ -1,17 +1,29 @@
+using EquipLease.Application;
 using EquipLease.Persistence;
 using EquipLease.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Custom configurations
 builder.Services.AddCustomConfigurations(builder.Configuration);
 
-builder.Services.AddPersistence(builder.Configuration);
+// Application layers
+builder.Services
+    .AddApplication()
+    .AddPersistence(builder.Configuration);
 
-builder.Services.AddControllers();
+// Configured controllers
+builder.Services.AddControllersWithConfiguredApiBehavior(builder.Configuration);
+
+// Exceptions handling
+builder.Services.AddExceptionHandlerWithProblemDetails();
 
 var app = builder.Build();
 
 app.UseAuthorization();
+
+// Use exceptions handling
+app.UseExceptionHandler();
 
 app.MapControllers();
 
