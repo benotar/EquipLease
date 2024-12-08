@@ -2,6 +2,7 @@
 using EquipLease.Application.Common.Converters;
 using EquipLease.Application.Configurations;
 using EquipLease.Domain.Enums;
+using EquipLease.WebApi.Authentication;
 using EquipLease.WebApi.Extensions;
 using EquipLease.WebApi.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +17,14 @@ public static class DependencyInjection
         // Add database configurations
         services.Configure<DatabaseConfiguration>(
             configuration.GetSection(DatabaseConfiguration.ConfigurationKey));
-        
+
+        // Add authentication configurations
+        services.Configure<AuthenticationConfiguration>(
+            configuration.GetSection(AuthenticationConfiguration.ConfigurationKey));
+
         return services;
     }
-    
+
     // Add configured controllers
     public static IServiceCollection AddControllersWithConfiguredApiBehavior(this IServiceCollection services,
         IConfiguration configuration)
@@ -46,7 +51,7 @@ public static class DependencyInjection
                     var result = new UnprocessableEntityObjectResult(
                         new Result<CustomValidationProblemDetails>
                         {
-                            ErrorCode = ErrorCode.InvalidModel, 
+                            ErrorCode = ErrorCode.InvalidModel,
                             Data = details
                         });
 
@@ -58,7 +63,7 @@ public static class DependencyInjection
 
         return services;
     }
-    
+
     // Add exception handler
     public static IServiceCollection AddExceptionHandlerWithProblemDetails(this IServiceCollection services)
     {
@@ -68,4 +73,13 @@ public static class DependencyInjection
 
         return services;
     }
+
+    // Add API Key filter
+    public static IServiceCollection AddApiKeyFilter(this IServiceCollection services)
+    {
+        services.AddScoped<ApiKeyAuthFilter>();
+
+        return services;
+    }
+
 }

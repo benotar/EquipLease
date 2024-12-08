@@ -8,5 +8,7 @@ public enum ErrorCode
     NotEnoughFreeArea,
     InvalidModel,
     MockErrorCode,
+    ApiKeyMissing,
+    InvalidApiKey,
     UnexpectedError
 }

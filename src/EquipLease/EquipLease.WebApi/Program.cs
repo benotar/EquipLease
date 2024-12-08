@@ -18,6 +18,9 @@ builder.Services.AddControllersWithConfiguredApiBehavior(builder.Configuration);
 // Exceptions handling
 builder.Services.AddExceptionHandlerWithProblemDetails();
 
+// API Key filtering
+builder.Services.AddApiKeyFilter();
+
 var app = builder.Build();
 
 app.UseAuthorization();
