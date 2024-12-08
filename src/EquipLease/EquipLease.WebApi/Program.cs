@@ -18,12 +18,25 @@ builder.Services.AddControllersWithConfiguredApiBehavior(builder.Configuration);
 // Exceptions handling
 builder.Services.AddExceptionHandlerWithProblemDetails();
 
+// Swagger
+builder.Services.AddSwagger(builder.Configuration);
+
 // API Key filtering
 builder.Services.AddApiKeyFilter();
 
 var app = builder.Build();
 
 app.UseAuthorization();
+
+// Swagger
+app.UseSwagger();
+app.UseSwaggerUI(config =>
+{
+    config.RoutePrefix = string.Empty;
+
+    config.SwaggerEndpoint("swagger/v1/swagger.json", "EquipLease API");
+});
+
 
 // Use exceptions handling
 app.UseExceptionHandler();
