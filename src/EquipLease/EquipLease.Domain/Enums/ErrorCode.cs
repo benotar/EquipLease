@@ -7,5 +7,6 @@ public enum ErrorCode
     EquipmentQuantityNotValid,
     NotEnoughFreeArea,
     InvalidModel,
+    MockErrorCode,
     UnexpectedError
 }

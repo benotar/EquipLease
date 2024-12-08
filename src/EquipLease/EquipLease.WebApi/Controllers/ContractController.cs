@@ -39,7 +39,7 @@ public class ContractController : BaseController
     {
         // Call contract service
         var createContractResult = await _contractService
-            .CreateContractAsync(requestModel.ProcessEquipmentTypeCode,
+            .CreateContractAsync(requestModel.ProductionFacilityCode,
                 requestModel.ProcessEquipmentTypeCode, requestModel.EquipmentQuantity);
 
         // Check the result of the contract service call

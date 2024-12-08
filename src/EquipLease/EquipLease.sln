@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipLease.Application", "E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipLease.WebApi", "EquipLease.WebApi\EquipLease.WebApi.csproj", "{A7628100-C5CE-436F-A4E8-0038C6E44D8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EquipLease.UnitTests", "EquipLease.UnitTests\EquipLease.UnitTests.csproj", "{EF5F0AE5-97D2-4541-9CA3-47ECEA9F44F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,7 @@ Global
 		{74EA7C4D-DD72-4E05-AD5B-36D4C96293E4} = {02CF0162-F4C7-495C-9A8E-65E8A5238F66}
 		{2AF5E5A6-BCBD-4F39-B58C-A700B8DE1020} = {02CF0162-F4C7-495C-9A8E-65E8A5238F66}
 		{A7628100-C5CE-436F-A4E8-0038C6E44D8D} = {0607FAEB-8892-4605-B44C-424BD1232AA1}
+		{EF5F0AE5-97D2-4541-9CA3-47ECEA9F44F5} = {F1A3608A-687A-486A-9A04-4576CEA17E16}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DC9FD70B-5101-420C-AB1A-DAF9BEA40A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -44,5 +47,9 @@ Global
 		{A7628100-C5CE-436F-A4E8-0038C6E44D8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7628100-C5CE-436F-A4E8-0038C6E44D8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7628100-C5CE-436F-A4E8-0038C6E44D8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF5F0AE5-97D2-4541-9CA3-47ECEA9F44F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF5F0AE5-97D2-4541-9CA3-47ECEA9F44F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF5F0AE5-97D2-4541-9CA3-47ECEA9F44F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF5F0AE5-97D2-4541-9CA3-47ECEA9F44F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
