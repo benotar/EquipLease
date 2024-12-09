@@ -1,4 +1,5 @@
 using EquipLease.Application;
+using EquipLease.Application.Services;
 using EquipLease.Persistence;
 using EquipLease.WebApi;
 
@@ -17,6 +18,10 @@ builder.Services.AddControllersWithConfiguredApiBehavior(builder.Configuration);
 
 // Exceptions handling
 builder.Services.AddExceptionHandlerWithProblemDetails();
+
+// Async background processor
+builder.Services.AddConfiguredQueueClient(builder.Configuration);
+builder.Services.AddHostedService<EquipBackgroundService>();
 
 // Swagger
 builder.Services.AddSwagger(builder.Configuration);

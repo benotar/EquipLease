@@ -24,6 +24,10 @@ public static class DependencyInjection
         services.Configure<AuthenticationConfiguration>(
             configuration.GetSection(AuthenticationConfiguration.ConfigurationKey));
 
+        // Add Azure Queue Storage configurations
+        services.Configure<AzureQueueStorageConfiguration>(
+            configuration.GetSection(AzureQueueStorageConfiguration.ConfigurationKey));
+
         return services;
     }
 

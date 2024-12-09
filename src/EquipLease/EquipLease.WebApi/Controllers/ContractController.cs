@@ -14,14 +14,17 @@ namespace EquipLease.WebApi.Controllers;
 public class ContractController : BaseController
 {
     private readonly IContractService _contractService;
+    private readonly IAzureQueueStorageService _queueStorageService;
     
     /// <summary>
     /// Initializes a new instance of the <see cref="ContractController"/> class.
     /// </summary>
-    /// <param name="contractService">The contract service to be used for handling contract logic.</param>
-    public ContractController(IContractService contractService)
+    /// <param name="contractService">Service for handling contract-related business logic.</param>
+    /// <param name="queueStorageService">Service for interacting with Azure Queue Storage.</param>
+    public ContractController(IContractService contractService, IAzureQueueStorageService queueStorageService)
     {
         _contractService = contractService;
+        _queueStorageService = queueStorageService;
     }
     
     /// <summary>
@@ -71,7 +74,7 @@ public class ContractController : BaseController
     {
         // Call contract service
         var getContractsResult = await _contractService.GetContractsAsync();
-
+        
         // Check the result of the contract service call
         if (!getContractsResult.IsSucceed)
         {
@@ -131,6 +134,9 @@ public class ContractController : BaseController
             .CreateContractAsync(requestModel.ProductionFacilityCode,
                 requestModel.ProcessEquipmentTypeCode, requestModel.EquipmentQuantity);
 
+        // Calling the send message to Azure Queue Storage method
+        await _queueStorageService.SendMessageAsync(createContractResult);
+        
         // Check the result of the contract service call
         if (!createContractResult.IsSucceed)
         {

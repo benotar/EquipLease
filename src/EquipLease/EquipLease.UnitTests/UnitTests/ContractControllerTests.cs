@@ -11,12 +11,14 @@ namespace EquipLease.UnitTests.UnitTests;
 public class ContractControllerTests
 {
     private readonly Mock<IContractService> _mockContractService;
+    private readonly Mock<IAzureQueueStorageService> _queueStorageService;
     private readonly ContractController _controller;
 
     public ContractControllerTests()
     {
         _mockContractService = new Mock<IContractService>();
-        _controller = new ContractController(_mockContractService.Object);
+        _queueStorageService = new Mock<IAzureQueueStorageService>();
+        _controller = new ContractController(_mockContractService.Object, _queueStorageService.Object);
     }
 
     [Fact]
