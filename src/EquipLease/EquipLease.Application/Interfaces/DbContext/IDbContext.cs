@@ -1,7 +1,7 @@
 ﻿using EquipLease.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EquipLease.Application.Interfaces.Persistence;
+namespace EquipLease.Application.Interfaces.DbContext;
 
 public interface IDbContext : IDisposable
 {

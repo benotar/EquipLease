@@ -1,4 +1,6 @@
-﻿using EquipLease.Application.Interfaces.Persistence;
+﻿using EquipLease.Application.Interfaces.DbContext;
+using EquipLease.Application.Interfaces.Repository;
+using EquipLease.Application.Interfaces.UnitOfWork;
 
 namespace EquipLease.Persistence;
 

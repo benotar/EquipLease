@@ -1,4 +1,6 @@
-﻿namespace EquipLease.Application.Interfaces.Persistence;
+﻿using EquipLease.Application.Interfaces.Repository;
+
+namespace EquipLease.Application.Interfaces.UnitOfWork;
 
 public interface IUnitOfWork : IDisposable
 {

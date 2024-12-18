@@ -1,7 +1,7 @@
 ﻿using EquipLease.Application.Common;
 using EquipLease.Application.DTOs;
-using EquipLease.Application.Interfaces.Persistence;
 using EquipLease.Application.Interfaces.Services;
+using EquipLease.Application.Interfaces.UnitOfWork;
 using EquipLease.Domain.Entities;
 using EquipLease.Domain.Enums;
 

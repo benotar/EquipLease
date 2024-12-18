@@ -1,4 +1,5 @@
-﻿using EquipLease.Application.Interfaces.Persistence;
+﻿using EquipLease.Application.Interfaces.DbContext;
+using EquipLease.Application.Interfaces.Repository;
 using EquipLease.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 

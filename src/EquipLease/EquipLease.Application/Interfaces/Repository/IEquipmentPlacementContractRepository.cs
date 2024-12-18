@@ -1,6 +1,6 @@
 ﻿using EquipLease.Domain.Entities;
 
-namespace EquipLease.Application.Interfaces.Persistence;
+namespace EquipLease.Application.Interfaces.Repository;
 
 public interface IEquipmentPlacementContractRepository
 {
