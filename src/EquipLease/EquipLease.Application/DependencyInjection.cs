@@ -15,7 +15,7 @@ public static class DependencyInjection
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         // Add AzureQueueStorageService
-        services.AddScoped<IAzureQueueStorageService, AzureQueueStorageService>();
+        services.AddSingleton<IAzureQueueStorageService, AzureQueueStorageService>();
 
         // Add ContractService
         services.AddScoped<IContractService, ContractService>();

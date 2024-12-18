@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
-using Azure.Storage.Queues;
 using EquipLease.Application.Common;
 using EquipLease.Application.DTOs;
+using EquipLease.Application.Interfaces.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -11,15 +11,14 @@ public class EquipBackgroundService : BackgroundService
 {
     private readonly ILogger<EquipBackgroundService> _logger;
     private readonly JsonSerializerOptions _options;
-    private readonly QueueClient _queueClient;
-
+    private readonly IAzureQueueStorageService _queueStorageService;
 
     public EquipBackgroundService(ILogger<EquipBackgroundService> logger, JsonSerializerOptions options,
-        QueueClient queueClient)
+        IAzureQueueStorageService queueStorageService)
     {
         _logger = logger;
         _options = options;
-        _queueClient = queueClient;
+        _queueStorageService = queueStorageService;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -29,8 +28,7 @@ public class EquipBackgroundService : BackgroundService
             _logger.LogInformation("Reading from Azure Queue.");
 
             // Receive message from Azure Queue Storage
-            var queueMessage = await _queueClient.ReceiveMessageAsync(
-                TimeSpan.FromSeconds(30), stoppingToken);
+            var queueMessage = await _queueStorageService.GetQueueMessageAsync(stoppingToken);
 
             // Check if message exists
             if (queueMessage.Value is not null)
@@ -44,8 +42,8 @@ public class EquipBackgroundService : BackgroundService
                     JsonSerializer.Serialize(createContractResultData, _options));
 
                 // Delete message from Azure Queue Storage
-                await _queueClient.DeleteMessageAsync(queueMessage.Value.MessageId, queueMessage.Value.PopReceipt,
-                    stoppingToken);
+                await _queueStorageService.DeleteQueueMessageAsync(queueMessage.Value.MessageId,
+                    queueMessage.Value.PopReceipt, stoppingToken);
             }
             else
             {
