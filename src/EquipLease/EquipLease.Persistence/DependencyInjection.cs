@@ -1,5 +1,6 @@
 ﻿using EquipLease.Application.Configurations;
 using EquipLease.Application.Interfaces.Persistence;
+using EquipLease.Persistence.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,7 +41,15 @@ public static class DependencyInjection
 
         services.AddScoped<IDbContext>(provider =>
             provider.GetRequiredService<EquipDbContext>());
-
+        
+        // Add repositories
+        services.AddScoped<IProductionFacilityRepository, ProductionFacilityRepository>();
+        services.AddScoped<IProcessEquipmentTypeRepository, ProcessEquipmentTypeRepository>();
+        services.AddScoped<IEquipmentPlacementContractRepository, EquipmentPlacementContractRepository>();
+        
+        // Add UoW
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        
         return services;
     }
 }
