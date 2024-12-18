@@ -2,8 +2,8 @@
 
 public interface IUnitOfWork : IDisposable
 {
-    IProductionFacilityRepository ProductionFacilityRepository { get; }
-    IProcessEquipmentTypeRepository ProcessEquipmentTypeRepository { get; }
-    IEquipmentPlacementContractRepository EquipmentPlacementContractRepository { get; }
+    IProductionFacilityRepository ProductionFacilities { get; }
+    IProcessEquipmentTypeRepository ProcessEquipmentTypes { get; }
+    IEquipmentPlacementContractRepository EquipmentPlacementContracts { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

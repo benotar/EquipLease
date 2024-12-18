@@ -28,4 +28,9 @@ public class EquipmentPlacementContractRepository : IEquipmentPlacementContractR
             .Include(epc => epc.ProductionFacility)
             .SumAsync(epc => epc.NumberOfEquipmentUnits * epc.ProcessEquipmentType.Area);
     }
+
+    public void Add(EquipmentPlacementContract newContract)
+    {
+        _dbContext.EquipmentPlacementContracts.Add(newContract);
+    }
 }

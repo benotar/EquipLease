@@ -20,9 +20,9 @@ public class ProductionFacilityRepository : IProductionFacilityRepository
             .FirstOrDefaultAsync(pf => pf.Code.Equals(code));
     }
 
-    public void UpdateFreeAreaAsync(ProductionFacility existingProductionFacility, decimal totalProcessEquipmentTypeArea)
+    public void UpdateFreeArea(ProductionFacility existingProductionFacility, decimal requiredProductionFacilityArea)
     {
-        existingProductionFacility!.StandardAreaForEquipment -= totalProcessEquipmentTypeArea;
+        existingProductionFacility!.StandardAreaForEquipment -= requiredProductionFacilityArea;
         
         existingProductionFacility.UpdatedAt = DateTime.UtcNow;
     }

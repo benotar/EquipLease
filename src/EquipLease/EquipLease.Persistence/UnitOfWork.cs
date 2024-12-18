@@ -7,11 +7,11 @@ public class UnitOfWork : IUnitOfWork
     private readonly IDbContext _dbContext;
     private bool _disposed = false;
 
-    public IProductionFacilityRepository ProductionFacilityRepository { get; }
+    public IProductionFacilityRepository ProductionFacilities { get; }
 
-    public IProcessEquipmentTypeRepository ProcessEquipmentTypeRepository { get; }
+    public IProcessEquipmentTypeRepository ProcessEquipmentTypes { get; }
 
-    public IEquipmentPlacementContractRepository EquipmentPlacementContractRepository { get; }
+    public IEquipmentPlacementContractRepository EquipmentPlacementContracts { get; }
 
     public UnitOfWork(IDbContext dbContext, 
         IProductionFacilityRepository productionFacilityRepository, 
@@ -19,9 +19,9 @@ public class UnitOfWork : IUnitOfWork
         IEquipmentPlacementContractRepository equipmentPlacementContractRepository)
     {
         _dbContext = dbContext;
-        ProductionFacilityRepository = productionFacilityRepository;
-        ProcessEquipmentTypeRepository = processEquipmentTypeRepository;
-        EquipmentPlacementContractRepository = equipmentPlacementContractRepository;
+        ProductionFacilities = productionFacilityRepository;
+        ProcessEquipmentTypes = processEquipmentTypeRepository;
+        EquipmentPlacementContracts = equipmentPlacementContractRepository;
     }
 
 

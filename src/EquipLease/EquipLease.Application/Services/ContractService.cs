@@ -4,26 +4,25 @@ using EquipLease.Application.Interfaces.Persistence;
 using EquipLease.Application.Interfaces.Services;
 using EquipLease.Domain.Entities;
 using EquipLease.Domain.Enums;
-using Microsoft.EntityFrameworkCore;
 
 namespace EquipLease.Application.Services;
 
 public class ContractService : IContractService
 {
-    private readonly IDbContext _dbContext;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public ContractService(IDbContext dbContext)
+    public ContractService(IUnitOfWork unitOfWork)
     {
-        _dbContext = dbContext;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<Result<ContractDto>> CreateContractAsync(string productionFacilityCode,
         string processEquipmentTypeCode, int equipmentQuantity)
     {
         // Check if the production facility exists
-        var existingProductionFacility = await _dbContext.ProductionFacilities
-            .AsTracking()
-            .FirstOrDefaultAsync(pf => pf.Code.Equals(productionFacilityCode));
+        var existingProductionFacility = await _unitOfWork
+            .ProductionFacilities
+            .GetByCodeAsync(productionFacilityCode);
 
         if (existingProductionFacility is null)
         {
@@ -31,8 +30,9 @@ public class ContractService : IContractService
         }
 
         // Check if the process equipment type exists
-        var existingProcessEquipmentType = await _dbContext.ProcessEquipmentTypes
-            .FirstOrDefaultAsync(pet => pet.Code.Equals(processEquipmentTypeCode));
+        var existingProcessEquipmentType = await _unitOfWork
+            .ProcessEquipmentTypes
+            .GetByCodeAsync(processEquipmentTypeCode);
 
         if (existingProcessEquipmentType is null)
         {
@@ -45,11 +45,17 @@ public class ContractService : IContractService
             return ErrorCode.EquipmentQuantityNotValid;
         }
 
-        // Calculate the total area occupied by the equipment with the contract
-        var totalProcessEquipmentTypeArea = existingProcessEquipmentType.Area * equipmentQuantity;
+        // Calculate the total area occupied by all contracts for this production facility
+        var allOccupiedAreaByContracts = await _unitOfWork
+            .EquipmentPlacementContracts
+            .GetOccupiedAreaAsync(existingProductionFacility.Id);
+
+        // Calculate the required free area for placing production equipment in the production facility
+        var requiredProductionFacilityArea = existingProcessEquipmentType.Area * equipmentQuantity;
 
         // Check whether there is enough area in the production facility to accommodate the equipment
-        if (totalProcessEquipmentTypeArea > existingProductionFacility.StandardAreaForEquipment)
+        if (existingProductionFacility.StandardAreaForEquipment - allOccupiedAreaByContracts <
+            requiredProductionFacilityArea)
         {
             return ErrorCode.NotEnoughFreeArea;
         }
@@ -63,14 +69,14 @@ public class ContractService : IContractService
         };
 
         // Add contract to database
-        _dbContext.EquipmentPlacementContracts.Add(newContract);
+        _unitOfWork.EquipmentPlacementContracts.Add(newContract);
 
         // Update the amount of free area for the production facility
-        existingProductionFacility.StandardAreaForEquipment -= totalProcessEquipmentTypeArea;
-        existingProductionFacility.UpdatedAt = DateTime.UtcNow;
+        _unitOfWork.ProductionFacilities.UpdateFreeArea(existingProductionFacility,
+            requiredProductionFacilityArea);
 
         // Save changes
-        await _dbContext.SaveChangesAsync();
+        await _unitOfWork.SaveChangesAsync();
 
         // Return Dto result
         return new ContractDto(
@@ -84,10 +90,9 @@ public class ContractService : IContractService
     public async Task<Result<IEnumerable<ContractDto>>> GetContractsAsync()
     {
         // Get a list of contracts, including navigation properties
-        var contracts = await _dbContext.EquipmentPlacementContracts
-            .Include(epc => epc.ProductionFacility)
-            .Include(epc => epc.ProcessEquipmentType)
-            .ToListAsync();
+        var contracts = await _unitOfWork
+            .EquipmentPlacementContracts
+            .GetAllAsync();
 
         // Return Dto result
         var contractsDto = contracts.Select(epc =>
