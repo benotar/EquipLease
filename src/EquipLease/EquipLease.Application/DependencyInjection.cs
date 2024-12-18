@@ -42,6 +42,7 @@ public static class DependencyInjection
     public static IServiceCollection AddConfiguredQueueClient(this IServiceCollection services,
         IConfiguration configuration)
     {
+        // Set the Azure Storage Queue connection string in an environment variable "AzureStorageQueue__ConnectionString"
         var storageConfig = new AzureQueueStorageConfiguration();
 
         configuration.Bind(AzureQueueStorageConfiguration.ConfigurationKey, storageConfig);

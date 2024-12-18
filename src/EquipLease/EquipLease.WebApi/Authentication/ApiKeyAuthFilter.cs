@@ -20,6 +20,7 @@ public class ApiKeyAuthFilter : IAuthorizationFilter
 
     public void OnAuthorization(AuthorizationFilterContext context)
     {
+        // Set the API Key in an environment variable "Authentication__ApiKey"
         if (!context.HttpContext.Request.Headers.TryGetValue(_authConfig.HeaderName,
                 out var extractedApiKey))
         {
