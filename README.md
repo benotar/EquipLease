@@ -1,46 +1,58 @@
-# EquipLease
+# EquipLease  
+This repository contains a backend application for managing technology equipment placement contracts.  
 
-This repository contains a simple backend application.
+## Description  
+EquipLease is a backend service built using:  
 
-## Description
+- **Backend**: ASP.NET Core  
+- **Database**: Azure SQL Database (Code First with EF Core)  
 
-This project is a backend application built using:
+The service provides RESTful API endpoints to manage contracts, verify facility space availability, and retrieve contract details.  
 
-- **Backend**: ASP.NET Core
+## Features  
 
-The backend provides a set of RESTful API endpoints.
+### Contract Management  
+- **Contract Creation**:  
+  - **Endpoint**: Allows users to create new contracts for placing equipment in production facilities.  
+  - **Validation**: Checks the available space in the production facility to ensure it can accommodate the specified equipment.  
+  - **Asynchronous Processing**: Initiates a background process to log contract details after successful creation.  
 
-## Features
+- **Get Contracts**:  
+  - **Endpoint**: Retrieves a list of active contracts.  
+  - **Response Details**: Includes facility names, equipment types, and the number of units for each contract.  
 
-- **Contract Creation**:
-  - **Endpoint**: Allows users to create new contracts to place equipment in production facilities. Parameters such as production facility code, process equipment type code, and number of units are required.
-  - **Validation**: Checks the available space in the production facility to ensure it can accommodate the specified number of equipment.
-  - **Asynchronous Processing**: After creating a contract, launches an asynchronous background process to log the query results without blocking the user's query.
+### Data Access  
+- **Entity Framework Core**:  
+  - Leverages EF Core as the ORM for database operations, using the Code First approach.  
+- **Repository Pattern**:  
+  - Implements repository classes for decoupled data access, promoting cleaner and more testable code.  
+  - Example: The `ContractRepository` handles contract-specific data operations.  
+- **Unit of Work**:  
+  - Manages transactions across multiple repository operations, ensuring data consistency.  
+  - Centralized through the `IUnitOfWork` interface.  
 
-- **Get Contracts**:
-  - **Endpoint**: Retrieves the current list of active contracts.
-  - **Response Details**: Returns information including the name of the production facility, the name of the process equipment, and the number of equipment for each contract.
+### Business Logic  
+- **Space Validation**: Verifies the facility's available space before processing contract requests. Returns an error if there isn’t enough space.  
 
-- **Business Validation**:
-  - **Space Check**: Verifies the available space in the production facility before allowing equipment placement. Returns an error if there isn’t enough space.
+### Azure Integration  
+- **Database Hosting**: The application stores production facility, equipment type, and contract data in an Azure SQL Database.  
+- **Service Hosting**: The API is hosted in Azure App Service, providing public access.  
 
-- **Azure Integration**:
-  - **Database Hosting**: Uses an Azure SQL database to store production facilities, equipment types, and contracts.
-  - **Service Hosting**: The API is hosted in Azure App Service, providing public access to the endpoints.
+### Security  
+- **API Key**: Secures access to API endpoints by validating requests with a static API key.  
 
-- **Security**:
-  - **API Key Access**: Utilizes a static API key to securely access the API. Requests are validated against this key to prevent unauthorized access.
+### Testing  
+- **Unit Tests**:  
+  - Covers critical API functionality, including contract creation, retrieval, and validation scenarios.  
 
-- **Testing**:
-  - **Unit Tests**: Implements tests for controller methods to ensure correct functionality. These tests cover the contract creation and retrieval endpoints, including validation scenarios.
+### Background Processing  
+- **Asynchronous Queue**:  
+  - Implements an Azure Storage Queue and `BackgroundService` for post-contract creation logging.  
 
-- **Background Processing**:
-  - **Asynchronous Queue**: Implements an asynchronous background processor to handle post-creation tasks, such as logging contract details. This processor is powered by Azure Storage Queue and runs through ASP.NET Core BackgroundService.
+### CI/CD Pipeline  
+- **GitHub Actions Workflow**:  
+  - Automates build, test, and deployment processes to Azure App Service.  
 
-- **GitHub Actions Workflow**:
-  - **Publish 🚀🚀**: This workflow is designed to automate the process of building, testing, publishing, and deploying ASP.NET Core application to Azure App Service.
-
-#### This comprehensive set of features allows the service to efficiently manage on-premises technology equipment rental contracts, while ensuring both security and scalability.
 
 ## Contact
-If you have any questions, create an issue, or contact me using [Instagram](https://www.instagram.com/benotar_) or Telegram (@benotaar).
+If you have any questions, create issue, or contact me using [Instagram](https://www.instagram.com/benotar_) or [Telegram](https://t.me/benotaar).
