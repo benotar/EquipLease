@@ -1,42 +1,40 @@
-name: Publish 🚀🚀
+name: Publish Backend
 
-on: 
+on:
   workflow_dispatch:
   push:
     branches:
-    - master
+      - main
 
-env: 
-  AZURE_WEBAPP_NAME: equip-lease
+env:
+  AZURE_WEBAPP_NAME: weather-backend
   AZURE_WEBAPP_PACKAGE_PATH: "./publish"
-    
+
 jobs:
   publish:
     runs-on: ubuntu-latest
-  
+
     steps:
-        - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-        - name: Setup .NET
-          uses: actions/setup-dotnet@v3
-          with:
-            dotnet-version: '8.0.x'
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+          
+      - name: Restore
+        run: dotnet restore ./Backend/Proj1.sln
 
-        - name: Restore
-          run: dotnet restore ./src/EquipLease/EquipLease.sln
+      - name: Build with dotnet
+        run: dotnet build ./Backend/Proj1.sln --configuration Release --no-restore
 
-        - name: Build
-          run: dotnet build ./src/EquipLease/EquipLease.sln --configuration Release --no-restore
+      - name: dotnet publish
+        run: dotnet publish ./Backend/Proj1.sln --configuration Release --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
-        - name: Test
-          run: dotnet test ./src/EquipLease/EquipLease.sln --configuration Release --no-restore --no-build
-
-        - name: Publish
-          run: dotnet publish ./src/EquipLease/EquipLease.sln --configuration Release --no-build --output ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-
-        - name: Deployment
-          uses: azure/webapps-deploy@v2
-          with:
-            app-name: ${{env.AZURE_WEBAPP_NAME}}
-            publish-profile: ${{secrets.AZURE_PUBLISH_PROFILE}}
-            package: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
+      - name: Deployment
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{env.AZURE_WEBAPP_NAME}}
+          publish-profile: ${{secrets.AZURE_PUBLISH_PROFILE}}
+          package: ${{env.AZURE_WEBAPP_PACKAGE_PATH}}
