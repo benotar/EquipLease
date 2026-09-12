@@ -1,0 +1,35 @@
+name: Build backend
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+      - dev
+
+concurrency:
+  group: ${{github.workflow}}-${{github.ref}}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore EquipLease.slnx
+
+      - name: Build
+        run: dotnet build EquipLease.slnx --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test EquipLease.slnx --configuration Release --no-restore --no-build
+        
