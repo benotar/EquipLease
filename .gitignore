@@ -6,6 +6,9 @@
 # dotenv files
 .env
 
+# Duende IdentityServer dev signing key
+tempkey.jwk
+
 # User-specific files
 *.rsuser
 *.suo
@@ -88,6 +91,8 @@ StyleCopReport.xml
 *.pgc
 *.pgd
 *.rsp
+# but not Directory.Build.rsp, as it configures directory-level build defaults
+!Directory.Build.rsp
 *.sbr
 *.tlb
 *.tli
@@ -422,10 +427,6 @@ autom4te.cache/
 tarballs/
 test-results/
 
-# Mac bundle stuff
-*.dmg
-*.app
-
 # content below from: https://github.com/github/gitignore/blob/main/Global/macOS.gitignore
 # General
 .DS_Store
@@ -483,5 +484,34 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 
-# Plugin for Rider directory
-src/EquipLease/EAFCS6953
+.obsidian
+.claude
+
+# =========================
+# Vite / Frontend (React)
+# =========================
+
+dist/
+dist-ssr/
+.vite/
+.vite-temp/
+
+# env files (Vite)
+.env
+.env.*
+!.env.example
+
+# logs (Node tools)
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# JS test coverage (Vitest/Jest)
+coverage/
+
+# optional cache
+.eslintcache

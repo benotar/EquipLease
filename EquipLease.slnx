@@ -1,0 +1,33 @@
+<Solution>
+  <Folder Name="/Core/">
+    <Project Path="src/backend/EquipLease.Domain/EquipLease.Domain.csproj" />
+    <Project Path="src/backend/EquipLease.Application/EquipLease.Application.csproj" />
+  </Folder>
+  <Folder Name="/Infrastucture/">
+    <Project Path="src/backend/EquipLease.Infrastucture/EquipLease.Infrastucture.csproj" />
+  </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="src/backend/EquipLease.Api/EquipLease.Api.csproj" />
+  </Folder>
+  <Folder Name="/Solution-Items/">
+    <File Path="CLAUDE.md" />
+  </Folder>
+  <Folder Name="/Solution-Items/Build/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+  </Folder>
+  <Folder Name="/Solution-Items/DevOps/">
+    <File Path=".github/workflows/build.yml" />
+    <File Path=".gitignore" />
+  </Folder>
+  <Folder Name="/Solution-Items/Docs/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Tests/">
+  </Folder>
+  <Folder Name="/Tests/Unit/">
+    <Project Path="src/backend/EquipLease.Test.Unit/EquipLease.Test.Unit.csproj" />
+  </Folder>
+</Solution>
