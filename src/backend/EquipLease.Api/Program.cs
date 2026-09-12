@@ -1,7 +1,7 @@
 ﻿using EquipLease.Api;
 using EquipLease.Application;
 using EquipLease.Application.Services;
-using EquipLease.Infrastucture;
+using EquipLease.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +11,7 @@ builder.Services.AddCustomConfigurations(builder.Configuration);
 // Application layers
 builder.Services
     .AddApplication()
-    .AddPersistence(builder.Configuration);
+    .AddPersistence(builder.Configuration, builder.Environment);
 
 // Configured controllers
 builder.Services.AddControllersWithConfiguredApiBehavior(builder.Configuration);
@@ -20,8 +20,8 @@ builder.Services.AddControllersWithConfiguredApiBehavior(builder.Configuration);
 builder.Services.AddExceptionHandlerWithProblemDetails();
 
 // Async background processor
-builder.Services.AddConfiguredQueueClient(builder.Configuration);
-builder.Services.AddHostedService<EquipBackgroundService>();
+//builder.Services.AddConfiguredQueueClient(builder.Configuration);
+//builder.Services.AddHostedService<EquipBackgroundService>();
 
 // Swagger
 builder.Services.AddSwagger(builder.Configuration);

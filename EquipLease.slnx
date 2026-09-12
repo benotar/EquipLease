@@ -1,13 +1,13 @@
 <Solution>
   <Folder Name="/Core/">
-    <Project Path="src/backend/EquipLease.Domain/EquipLease.Domain.csproj" />
-    <Project Path="src/backend/EquipLease.Application/EquipLease.Application.csproj" />
+    <Project Path="src/Backend/EquipLease.Domain/EquipLease.Domain.csproj" />
+    <Project Path="src/Backend/EquipLease.Application/EquipLease.Application.csproj" />
   </Folder>
   <Folder Name="/Infrastucture/">
-    <Project Path="src/backend/EquipLease.Infrastucture/EquipLease.Infrastucture.csproj" />
+    <Project Path="src/Backend/EquipLease.Infrastructure/EquipLease.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/Presentation/">
-    <Project Path="src/backend/EquipLease.Api/EquipLease.Api.csproj" />
+    <Project Path="src/Backend/EquipLease.Api/EquipLease.Api.csproj" />
   </Folder>
   <Folder Name="/Solution-Items/">
     <File Path="CLAUDE.md" />
@@ -21,6 +21,7 @@
   <Folder Name="/Solution-Items/DevOps/">
     <File Path=".github/workflows/build.yml" />
     <File Path=".gitignore" />
+    <File Path="deploy/docker/compose.yml" />
   </Folder>
   <Folder Name="/Solution-Items/Docs/">
     <File Path="README.md" />
@@ -28,6 +29,6 @@
   <Folder Name="/Tests/">
   </Folder>
   <Folder Name="/Tests/Unit/">
-    <Project Path="src/backend/EquipLease.Test.Unit/EquipLease.Test.Unit.csproj" />
+    <Project Path="src/Backend/EquipLease.Test.Unit/EquipLease.Test.Unit.csproj" />
   </Folder>
 </Solution>

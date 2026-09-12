@@ -2,13 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EquipLease.Infrastucture.EntityTypeConfiguration;
+namespace EquipLease.Infrastructure.EntityTypeConfiguration;
 
 public class ProductionFacilityTypeConfiguration : IEntityTypeConfiguration<ProductionFacility>
 {
     public void Configure(EntityTypeBuilder<ProductionFacility> builder)
     {
         builder.ToTable("ProductionFacilities");
+
+        builder.HasKey(epc => epc.Id);
 
         builder.Property(pf => pf.Code)
             .IsRequired()

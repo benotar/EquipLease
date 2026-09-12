@@ -135,7 +135,7 @@ public class ContractController : BaseController
                 requestModel.ProcessEquipmentTypeCode, requestModel.EquipmentQuantity);
 
         // Calling the send message to Azure Queue Storage method
-        await _queueStorageService.SendMessageAsync(createContractResult);
+       // await _queueStorageService.SendMessageAsync(createContractResult);
 
         // Check the result of the contract service call
         if (!createContractResult.IsSucceed)

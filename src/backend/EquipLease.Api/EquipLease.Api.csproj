@@ -5,7 +5,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\EquipLease.Infrastucture\EquipLease.Infrastucture.csproj"/>
+        <ProjectReference Include="..\EquipLease.Infrastructure\EquipLease.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

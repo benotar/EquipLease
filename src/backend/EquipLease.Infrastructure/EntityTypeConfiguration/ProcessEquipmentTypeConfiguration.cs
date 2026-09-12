@@ -2,13 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EquipLease.Infrastucture.EntityTypeConfiguration;
+namespace EquipLease.Infrastructure.EntityTypeConfiguration;
 
 public class ProcessEquipmentTypeConfiguration : IEntityTypeConfiguration<ProcessEquipmentType>
 {
     public void Configure(EntityTypeBuilder<ProcessEquipmentType> builder)
     {
         builder.ToTable("ProcessEquipmentTypes");
+
+        builder.HasKey(epc => epc.Id);
 
         builder.Property(pet => pet.Code)
             .IsRequired()

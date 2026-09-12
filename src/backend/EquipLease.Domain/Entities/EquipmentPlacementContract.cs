@@ -2,10 +2,10 @@
 
 namespace EquipLease.Domain.Entities;
 
-public class EquipmentPlacementContract : DbEntity
+public class EquipmentPlacementContract : Entity
 {
-    public int ProductionFacilityId { get; set; }
-    public int ProcessEquipmentTypeId { get; set; }
+    public long ProductionFacilityId { get; set; }
+    public long ProcessEquipmentTypeId { get; set; }
     public int NumberOfEquipmentUnits { get; set; }
 
     // Navigation properties

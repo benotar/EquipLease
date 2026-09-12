@@ -2,13 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EquipLease.Infrastucture.EntityTypeConfiguration;
+namespace EquipLease.Infrastructure.EntityTypeConfiguration;
 
 public class EquipmentPlacementContractTypeConfiguration : IEntityTypeConfiguration<EquipmentPlacementContract>
 {
     public void Configure(EntityTypeBuilder<EquipmentPlacementContract> builder)
     {
         builder.ToTable("EquipmentPlacementContracts");
+
+        builder.HasKey(epc => epc.Id);
 
         builder.Property(epc => epc.NumberOfEquipmentUnits)
             .IsRequired();

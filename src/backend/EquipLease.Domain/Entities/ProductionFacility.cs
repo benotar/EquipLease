@@ -2,7 +2,7 @@
 
 namespace EquipLease.Domain.Entities;
 
-public class ProductionFacility : DbEntity
+public class ProductionFacility : Entity
 {
     public string Code { get; set; }
     public string Name { get; set; }

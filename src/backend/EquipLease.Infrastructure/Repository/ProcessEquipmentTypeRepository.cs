@@ -3,7 +3,7 @@ using EquipLease.Application.Interfaces.Repository;
 using EquipLease.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EquipLease.Infrastucture.Repository;
+namespace EquipLease.Infrastructure.Repository;
 
 public class ProcessEquipmentTypeRepository : IProcessEquipmentTypeRepository
 {

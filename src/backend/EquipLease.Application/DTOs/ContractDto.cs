@@ -1,7 +1,7 @@
 ﻿namespace EquipLease.Application.DTOs;
 
 public record ContractDto(
-    int Id,
+    long Id,
     string ProductionFacilityName,
     string ProcessEquipmentTypeName,
     int EquipmentQuantity

@@ -3,7 +3,7 @@ using EquipLease.Application.Interfaces.Repository;
 using EquipLease.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EquipLease.Infrastucture.Repository;
+namespace EquipLease.Infrastructure.Repository;
 
 public class EquipmentPlacementContractRepository : IEquipmentPlacementContractRepository
 {
@@ -22,7 +22,7 @@ public class EquipmentPlacementContractRepository : IEquipmentPlacementContractR
             .ToListAsync();
     }
 
-    public async Task<decimal> GetOccupiedAreaAsync(int productionFacilityId)
+    public async Task<decimal> GetOccupiedAreaAsync(long productionFacilityId)
     {
         return await _dbContext.EquipmentPlacementContracts
             .Where(pf => pf.ProductionFacilityId == productionFacilityId)

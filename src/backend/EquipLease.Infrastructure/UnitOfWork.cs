@@ -2,7 +2,7 @@
 using EquipLease.Application.Interfaces.Repository;
 using EquipLease.Application.Interfaces.UnitOfWork;
 
-namespace EquipLease.Infrastucture;
+namespace EquipLease.Infrastructure;
 
 public class UnitOfWork : IUnitOfWork
 {

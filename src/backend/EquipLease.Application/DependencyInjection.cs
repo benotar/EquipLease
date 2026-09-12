@@ -15,12 +15,12 @@ public static class DependencyInjection
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         // Add AzureQueueStorageService
-        services.AddSingleton<IAzureQueueStorageService, AzureQueueStorageService>();
+        //services.AddSingleton<IAzureQueueStorageService, AzureQueueStorageService>();
 
         // Add ContractService
         services.AddScoped<IContractService, ContractService>();
 
-        // Add JsonSerializerOptions 
+        // Add JsonSerializerOptions
         var jsonOptions = new JsonSerializerOptions
         {
             Converters =
